@@ -21,6 +21,7 @@ function validPassword() {
 
     if (pass1.value.length < 6) {
         pass1.classList.add("is-invalid")
+        pass2.classList.add("is-invalid")
     }
     else {
         pass1.classList.add("is-valid")
@@ -28,6 +29,7 @@ function validPassword() {
 
     if (pass2.value == pass1.value && pass1.value.length >= 6) {
         pass2.classList.add("is-valid")
+        pass1.classList.add("is-valid")
     }
     else {
         pass2.classList.add("is-invalid")
@@ -77,12 +79,15 @@ function validaEmailInput() {
     });
 }
 
-function validaPassInput(passw) {
+function validaPassInput(passw1,passw2) {
     validPassword();
-    passw.addEventListener("input", () => {
-        passw.classList.remove("is-invalid")
-        passw.classList.remove("is-valid")
+    passw1.addEventListener("input", () => {
+        passw1.classList.remove("is-invalid")
+        passw1.classList.remove("is-valid")
+        passw2.classList.remove("is-invalid")
+        passw2.classList.remove("is-valid")
         validPassword();
+
     });
 }
 
@@ -101,8 +106,8 @@ button.addEventListener("click", () => {
     validaDataInput(nombre);
     validaDataInput(apellido);
     validaEmailInput();
-    validaPassInput(pass1);
-    validaPassInput(pass2);
+    validaPassInput(pass1, pass2);
+    validaPassInput(pass2, pass1);
     validaBtnCheck();
 
 });
