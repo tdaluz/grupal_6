@@ -8,48 +8,106 @@ let check = document.getElementById("terminos");
 let btncheck = document.getElementById("btnCheck");
 
 
-
-
-function validData(dato){
-    if (dato.value.length == 0){
-        dato.classList.toggle("is-invalid")
+function validData(dato) {
+    if (dato.value.length == 0) {
+        dato.classList.add("is-invalid")
     }
     else {
-        dato.classList.toggle("is-valid")
+        dato.classList.add("is-valid")
     }
 }
 
-function validPassword(){
-    if (pass1.value.length < 6){
-        pass1.classList.toggle("is-invalid")
+function validPassword() {
+    
+    if (pass1.value.length < 6) {
+        pass1.classList.add("is-invalid")
     }
     else {
-        pass1.classList.toggle("is-valid")
-        if (pass2.value == pass1.value){
-            pass2.classList.toggle("is-valid")
+        pass1.classList.add("is-valid")
+    }
+
+        if (pass2.value == pass1.value && pass1.value.length >= 6) {
+            pass2.classList.add("is-valid")
         }
         else {
-            pass2.classList.toggle("is-invalid")
+            pass2.classList.add("is-invalid")
         }
+    
+}
+/////
+function validCheck(){
+    if (check.checked == false){
+        btncheck.classList.add("is-invalid")
+        btncheck.style.color = "red"
+        check.classList.add("is-invalid")
+    }
+    else {
+        btncheck.classList.add("is-valid")
+        check.classList.add("is-valid")
     }
 }
 
-function validCheck(){
-    if (check.checked == false){
-        btnCheck.classList.toggle("is-invalid")
-        btncheck.style.color = "red"
-        check.classList.toggle("is-invalid")
+function validEmail() {
+
+    var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+    if (email.value.length > 0 && validEmail.test(email.value)) {
+        email.classList.add("is-valid")
     }
     else {
-        btnCheck.classList.toggle("is-valid")
-        check.classList.toggle("is-valid")
+        email.classList.add("is-invalid")
     }
-} 
 
-button.addEventListener("click", () => {  
+}
+/////////
+button.addEventListener("click", () => {
     validData(nombre);
     validData(apellido);
-    validData(email);
+    validEmail()
     validPassword()
     validCheck();
+
+
+    nombre.addEventListener("input", () => {
+        nombre.classList.remove("is-valid")
+        nombre.classList.remove("is-invalid")
+        validData(nombre);
+    });
+
+    apellido.addEventListener("input", () => {
+        apellido.classList.remove("is-valid")
+        apellido.classList.remove("is-invalid")
+        validData(apellido);
+    });
+
+    email.addEventListener("input", () => {
+        email.classList.remove("is-valid")
+        email.classList.remove("is-invalid")
+        validEmail()
+    });
+
+    pass1.addEventListener("input", () => {
+        pass1.classList.remove("is-invalid")
+        pass1.classList.remove("is-valid")
+        validPassword();
+    });
+
+    pass2.addEventListener("input", () => {
+        pass2.classList.remove("is-invalid")
+        pass2.classList.remove("is-valid")
+        validPassword();
+    });
+
+    btncheck.addEventListener("change", () => {  
+        btncheck.classList.remove("is-invalid")
+        btncheck.classList.remove("is-valid")
+        validCheck();
+    });
+   
+
 });
+
+
+
+
+
