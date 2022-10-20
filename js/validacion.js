@@ -102,6 +102,14 @@ function validaBtnCheck() {
     });
 }
 
+function showAlertSuccess(){
+    document.getElementById("alert-success").classList.add("show");
+}
+
+function showAlertError() {
+    document.getElementById("alert-danger").classList.add("show");
+}
+
 button.addEventListener("click", () => {
     validaDataInput(nombre);
     validaDataInput(apellido);
@@ -109,6 +117,12 @@ button.addEventListener("click", () => {
     validaPassInput(pass1, pass2);
     validaPassInput(pass2, pass1);
     validaBtnCheck();
+
+    if(nombre.classList.contains("is-valid") && apellido.classList.contains("is-valid") && email.classList.contains("is-valid") && pass1.classList.contains("is-valid") && pass2.classList.contains("is-valid") && check.classList.contains("is-valid") ){
+     showAlertSuccess()
+    } else {
+     showAlertError()
+    }
 
 });
 
